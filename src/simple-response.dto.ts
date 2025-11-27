@@ -4,12 +4,12 @@ import { ApiProperty } from '@nestjs/swagger';
 export class SimpleResponseDto<T = any> {
   @ApiProperty({
     type: Boolean,
-    description: 'Indicates if the request was successful',
+    description: '表示请求是否成功',
   })
   success: boolean;
 
   @ApiProperty({
-    description: 'The data returned by the request',
+    description: '请求返回的数据',
     required: false,
     type: Object,
   })
@@ -17,7 +17,7 @@ export class SimpleResponseDto<T = any> {
 
   @ApiProperty({
     type: String,
-    description: 'A message associated with the response',
+    description: '与响应相关的消息',
     required: false,
   })
   message?: string;

@@ -3,7 +3,8 @@ import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
 import { SimpleResponseDto } from './simple-response.dto';
 
-export const ApiSimpleResponse = <TModel extends Type<any>>(model: TModel) => {
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
+export const ApiSimpleResponse = <TModel extends Type>(model: TModel) => {
   return applyDecorators(
     ApiOkResponse({
       schema: {

@@ -4,7 +4,7 @@ import { SimpleResponseDto } from './simple-response.dto';
 
 export class SimpleNumberResponseDto extends SimpleResponseDto<number> {
   @ApiProperty({
-    description: 'The data returned by the request',
+    description: '请求返回的数据',
     required: false,
     type: Number,
   })
