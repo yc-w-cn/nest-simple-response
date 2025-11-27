@@ -39,5 +39,9 @@
     "typescript-eslint": "^8.48.0"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yc-w-cn/nest-simple-response"
+  },
   "packageManager": "pnpm@10.23.0"
 }
