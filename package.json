@@ -1,0 +1,44 @@
+{
+  "name": "@yc-w-cn/nest-simple-response",
+  "version": "1.0.5",
+  "description": "Nest 模块",
+  "private": true,
+  "keywords": [
+    "yc-w-cn",
+    "nest",
+    "simple-response"
+  ],
+  "author": {
+    "name": "Yuchen Wang",
+    "email": "contact@wangyuchen.cn"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "nest build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.9",
+    "@nestjs/swagger": "^11.2.3",
+    "@yc-w-cn/nest-easy-logger": "^1.0.7",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@nestjs/testing": "^11.1.9",
+    "@typescript-eslint/parser": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.0"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.23.0"
+}
