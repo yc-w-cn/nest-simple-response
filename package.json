@@ -2,7 +2,6 @@
   "name": "@yc-w-cn/nest-simple-response",
   "version": "1.0.0",
   "description": "Nest 模块",
-  "private": true,
   "keywords": [
     "yc-w-cn",
     "nest",
