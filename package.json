@@ -1,6 +1,6 @@
 {
   "name": "@yc-w-cn/nest-simple-response",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "一个用于 Nest.js 框架的简单响应格式化工具，提供统一的 API 响应格式和 Swagger 文档装饰器",
   "keywords": [
     "yc-w-cn",

@@ -9,6 +9,7 @@
 - 提供便捷的响应工具类
 - 支持多种数据类型的响应装饰器
 - 集成日志记录
+- 友好异常处理
 
 ## 安装
 
@@ -19,6 +20,37 @@ pnpm add @yc-w-cn/nest-simple-response
 ## 使用示例
 
 ### 1. 使用响应工具类
+
+### 2. 友好异常处理示例
+
+ ```typescript
+ import { Controller, Get, UseFilters } from '@nestjs/common';
+ import { SimpleResponseUtil, SimpleExceptionFilter, SimpleException } from '@yc-w-cn/nest-simple-response';
+ 
+ @Controller('test')
+ @UseFilters(new SimpleExceptionFilter())
+ export class TestController {
+   @Get('exception')
+   testException() {
+     // 当抛出异常时，会被 SimpleExceptionFilter 捕获并格式化为统一的响应格式
+     throw new Error('测试异常');
+   }
+ 
+   @Get('custom-exception')
+   testCustomException() {
+     // 使用 SimpleException 抛出业务异常
+     throw new SimpleException('业务异常消息');
+   }
+ 
+   @Get('http-exception')
+   testHttpException() {
+     // 自定义异常处理
+     return SimpleResponseUtil.fail('自定义错误消息', { code: 'CUSTOM_ERROR' });
+   }
+ }
+ ```
+
+### 3. 使用 Swagger 装饰器
 
 ```typescript
 import { SimpleResponseUtil } from '@yc-w-cn/nest-simple-response';
@@ -118,6 +150,42 @@ export class TestController {
 
 - `SimpleResponseUtil.success(message?: string, data?: T)` - 静态调用成功响应
 - `SimpleResponseUtil.fail(message?: string, data?: T)` - 静态调用失败响应
+
+## 异常处理
+
+### SimpleExceptionFilter
+
+全局异常过滤器，统一处理各种异常并返回标准化的错误响应格式：
+
+```json
+{
+  "success": false,
+  "message": "错误消息"
+}
+```
+
+**支持的异常类型：**
+- `SimpleException`：业务异常，直接返回错误信息
+- `HttpException`：NestJS 内置异常，提取错误信息
+- 其他异常：统一返回"服务器错误"，并打印详细错误日志
+
+### SimpleException
+
+友好的业务异常类，用于抛出业务逻辑异常：
+
+```typescript
+throw new SimpleException('用户不存在');
+```
+
+### 全局注册
+
+在 main.ts 中全局注册异常过滤器：
+
+```typescript
+import { SimpleExceptionFilter } from '@yc-w-cn/nest-simple-response';
+
+app.useGlobalFilters(new SimpleExceptionFilter());
+```
 
 ## 许可证
 
