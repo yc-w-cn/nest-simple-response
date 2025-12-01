@@ -34,7 +34,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.5.0",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"
   },
@@ -43,5 +43,5 @@
     "type": "git",
     "url": "https://github.com/yc-w-cn/nest-simple-response"
   },
-  "packageManager": "pnpm@10.23.0"
+  "packageManager": "pnpm@10.24.0"
 }
