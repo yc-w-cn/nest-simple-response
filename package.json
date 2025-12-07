@@ -15,7 +15,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "nest build",
-    "test": "jest"
+    "test": "jest",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.9",
