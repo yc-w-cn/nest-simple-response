@@ -132,6 +132,7 @@ export class TestController {
 
 ## 装饰器列表
 
+- `@ApiSimpleBaseResponse()` - 基础响应，不包含 data 字段，只返回成功/失败状态和消息
 - `@ApiSimpleResponse(model)` - 用于对象类型响应
 - `@ApiSimpleArrayResponse(model)` - 用于数组类型响应
 - `@ApiSimpleNumberResponse()` - 用于数字类型响应
