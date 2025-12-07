@@ -1,5 +1,17 @@
 # 变更记录
 
+## [1.0.4] - 2025-12-07
+
+### 重构
+
+- 重构简单响应相关装饰器和 DTO 结构
+  - 替换简单响应装饰器中引用的 DTO 类型从 SimpleResponseDto 到 SimpleBaseResponseDto
+  - 新增 ApiSimpleBooleanResponse 装饰器，支持布尔类型的简单响应
+  - 删除 SimpleResponseDto、SimpleArrayResponseDto、SimpleNumberResponseDto 等旧 DTO 类
+  - 新建 SimpleBaseResponseDto，简化响应结构只包含 success 和 message 字段
+  - 更新装饰器导出，加入新 Boolean 类型响应装饰器，移除旧 DTO 导出
+  - 优化 Swagger 接口文档更清晰简洁，移除多余的数据字段声明
+
 ## [1.0.3] - 2025-12-07
 
 ### 重构
