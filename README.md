@@ -136,6 +136,7 @@ export class TestController {
 - `@ApiSimpleArrayResponse(model)` - 用于数组类型响应
 - `@ApiSimpleNumberResponse()` - 用于数字类型响应
 - `@ApiSimpleStringResponse()` - 用于字符串类型响应
+- `@ApiSimpleBooleanResponse()` - 用于布尔类型响应
 
 ## 工具类方法
 
