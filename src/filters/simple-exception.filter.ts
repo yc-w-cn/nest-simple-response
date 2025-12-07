@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { EasyLogger } from '@yc-w-cn/nest-easy-logger';
 
-import { SimpleException } from './simple.exception';
+import { SimpleException } from '../exceptions';
 
 @Catch()
 export class SimpleExceptionFilter implements ExceptionFilter {

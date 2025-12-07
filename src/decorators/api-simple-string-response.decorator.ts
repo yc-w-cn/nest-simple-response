@@ -1,7 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
-import { SimpleResponseDto } from './simple-response.dto';
+import { SimpleResponseDto } from '../dtos';
 
 export const ApiSimpleStringResponse = () => {
   return applyDecorators(

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { SimpleResponseDto } from './simple-response.dto';
+import { SimpleResponseDto } from '../dtos';
 
 export class SimpleArrayResponseDto<T = any> extends SimpleResponseDto<T[]> {
   @ApiProperty({
