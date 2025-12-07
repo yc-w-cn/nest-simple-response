@@ -3,7 +3,7 @@ import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
 import { SimpleBaseResponseDto } from '../dtos';
 
-export const ApiSimpleNumberResponse = () => {
+export const ApiSimpleBooleanResponse = () => {
   return applyDecorators(
     ApiOkResponse({
       schema: {
@@ -12,7 +12,7 @@ export const ApiSimpleNumberResponse = () => {
           {
             properties: {
               data: {
-                type: 'number',
+                type: 'boolean',
               },
             },
             required: ['data'], // 指定 data 为必填字段

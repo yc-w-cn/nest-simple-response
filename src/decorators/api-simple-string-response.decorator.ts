@@ -1,14 +1,14 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
-import { SimpleResponseDto } from '../dtos';
+import { SimpleBaseResponseDto } from '../dtos';
 
 export const ApiSimpleStringResponse = () => {
   return applyDecorators(
     ApiOkResponse({
       schema: {
         allOf: [
-          { $ref: getSchemaPath(SimpleResponseDto) },
+          { $ref: getSchemaPath(SimpleBaseResponseDto) },
           {
             properties: {
               data: {
