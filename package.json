@@ -41,8 +41,7 @@
   },
   "license": "MIT",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/yc-w-cn/nest-simple-response"
+    "url": "git+https://github.com/yc-w-cn/nest-simple-response.git"
   },
   "packageManager": "pnpm@10.24.0"
 }
