@@ -14,7 +14,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "nest build",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "clean": "rm -rf dist",
