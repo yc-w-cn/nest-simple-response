@@ -10,6 +10,7 @@
 - 支持多种数据类型的响应装饰器
 - 集成日志记录
 - 友好异常处理
+- 可配置日志输出（`silence`、`warnOnError`）
 
 ## 安装
 
@@ -19,91 +20,152 @@ pnpm add @yc-w-cn/nest-simple-response
 
 ## 使用示例
 
-### 1. 使用响应工具类
-
-### 2. 友好异常处理示例
-
- ```typescript
- import { Controller, Get, UseFilters } from '@nestjs/common';
- import { SimpleResponseUtil, SimpleExceptionFilter, SimpleException } from '@yc-w-cn/nest-simple-response';
- 
- @Controller('test')
- @UseFilters(new SimpleExceptionFilter())
- export class TestController {
-   @Get('exception')
-   testException() {
-     // 当抛出异常时，会被 SimpleExceptionFilter 捕获并格式化为统一的响应格式
-     throw new Error('测试异常');
-   }
- 
-   @Get('custom-exception')
-   testCustomException() {
-     // 使用 SimpleException 抛出业务异常
-     throw new SimpleException('业务异常消息');
-   }
- 
-   @Get('http-exception')
-   testHttpException() {
-     // 自定义异常处理
-     return SimpleResponseUtil.fail('自定义错误消息', { code: 'CUSTOM_ERROR' });
-   }
- }
- ```
-
-### 3. 使用 Swagger 装饰器
+### 响应工具类
 
 ```typescript
 import { SimpleResponseUtil } from '@yc-w-cn/nest-simple-response';
 
-// 实例化工具类
+// 实例化响应工具，传入可选的模块/控制器名称，便于日志标识
 const responseUtil = new SimpleResponseUtil('MyController');
 
-// 成功响应
+// 成功响应（包含消息与数据）
 return responseUtil.success('操作成功', { id: 1, name: '测试数据' });
-
-// 简写形式
+// 成功响应（data 简写，不含 message）
 return responseUtil.data({ id: 1, name: '测试数据' });
-
-// 失败响应
+// 失败响应（包含错误详情）
 return responseUtil.fail('操作失败', { error: '参数错误' });
 
-// 静态方法调用
+// 静态调用：成功响应
 return SimpleResponseUtil.success('操作成功', { id: 1, name: '测试数据' });
+// 静态调用：失败响应
 return SimpleResponseUtil.fail('操作失败');
 ```
 
-### 2. 使用 Swagger 装饰器
+### 配置项
+
+```typescript
+// silence: 静默模式，不输出日志
+const quietUtil = new SimpleResponseUtil('MyController', { silence: true });
+// 成功响应（静默模式）
+quietUtil.success('操作成功', { id: 2 });
+// 失败响应（静默模式）
+quietUtil.fail('操作失败', { code: 'E001' });
+
+// warnOnError: 失败时输出 warn 日志
+const warnUtil = new SimpleResponseUtil('MyController', { warnOnError: true });
+warnUtil.fail('操作失败', { code: 'E002' });
+
+// 静态调用支持临时选项覆盖
+SimpleResponseUtil.fail('操作失败', { code: 'E003' }, { warnOnError: true });
+```
+
+### 友好异常处理
+
+```typescript
+import { Controller, Get, UseFilters } from '@nestjs/common';
+import { SimpleResponseUtil, SimpleExceptionFilter, SimpleException } from '@yc-w-cn/nest-simple-response';
+
+@Controller('test')
+@UseFilters(new SimpleExceptionFilter()) // 为控制器注册异常过滤器，统一错误响应
+export class TestController {
+  /**
+   * 抛出普通异常，演示过滤器的默认处理行为
+   */
+  @Get('exception')
+  testException() {
+    throw new Error('测试异常');
+  }
+
+  /**
+   * 抛出业务异常，直接返回业务错误消息
+   */
+  @Get('custom-exception')
+  testCustomException() {
+    throw new SimpleException('业务异常消息');
+  }
+
+  /**
+   * 返回自定义错误响应，用于 HTTP 异常案例
+   */
+  @Get('http-exception')
+  testHttpException() {
+    return SimpleResponseUtil.fail('自定义错误消息', { code: 'CUSTOM_ERROR' });
+  }
+}
+```
+
+### Swagger 装饰器
 
 ```typescript
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ApiSimpleResponse, SimpleResponseUtil } from '@yc-w-cn/nest-simple-response';
+import {
+  ApiSimpleResponse,
+  ApiSimpleArrayResponse,
+  ApiSimpleNumberResponse,
+  ApiSimpleStringResponse,
+  ApiSimpleBooleanResponse,
+  ApiSimpleBaseResponse,
+  SimpleResponseUtil,
+} from '@yc-w-cn/nest-simple-response';
 
-@ApiTags('测试')
+@ApiTags('测试') // 为文档标注分组标签
 @Controller('test')
 export class TestController {
+  /**
+   * 返回对象类型响应
+   * 使用 ApiSimpleResponse 指定 Swagger 模型
+   */
   @Get()
-  @ApiSimpleResponse(UserDto) // 用于对象类型响应
+  @ApiSimpleResponse(UserDto)
   getTest() {
     return SimpleResponseUtil.success('操作成功', { id: 1, name: '测试用户' });
   }
 
+  /**
+   * 返回数组类型响应
+   * 使用 ApiSimpleArrayResponse 指定元素模型
+   */
   @Get('list')
-  @ApiSimpleArrayResponse(UserDto) // 用于数组类型响应
+  @ApiSimpleArrayResponse(UserDto)
   getList() {
     return SimpleResponseUtil.success('操作成功', [{ id: 1, name: '测试用户1' }, { id: 2, name: '测试用户2' }]);
   }
 
+  /**
+   * 返回数字类型响应
+   */
   @Get('count')
-  @ApiSimpleNumberResponse() // 用于数字类型响应
+  @ApiSimpleNumberResponse()
   getCount() {
     return SimpleResponseUtil.success('操作成功', 100);
   }
 
+  /**
+   * 返回字符串类型响应
+   */
   @Get('message')
-  @ApiSimpleStringResponse() // 用于字符串类型响应
+  @ApiSimpleStringResponse()
   getMessage() {
     return SimpleResponseUtil.success('操作成功', '测试消息');
+  }
+
+  /**
+   * 返回布尔类型响应
+   */
+  @Get('flag')
+  @ApiSimpleBooleanResponse()
+  getFlag() {
+    return SimpleResponseUtil.success('操作成功', true);
+  }
+
+  /**
+   * 返回基础响应，不包含 data 字段
+   */
+  @Get('base')
+  @ApiSimpleBaseResponse()
+  getBase() {
+    return SimpleResponseUtil.success('操作成功');
   }
 }
 ```
