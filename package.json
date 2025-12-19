@@ -26,10 +26,10 @@
     "class-validator": "^0.14.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^9.39.2",
     "@nestjs/testing": "^11.1.9",
-    "@typescript-eslint/parser": "^8.48.1",
-    "eslint": "^9.39.1",
+    "@typescript-eslint/parser": "^8.50.0",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
@@ -37,11 +37,11 @@
     "globals": "^16.5.0",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.1"
+    "typescript-eslint": "^8.50.0"
   },
   "license": "MIT",
   "repository": {
     "url": "git+https://github.com/yc-w-cn/nest-simple-response.git"
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "pnpm@10.26.1"
 }
