@@ -1,4 +1,5 @@
 import { EasyLogger } from '@yc-w-cn/nest-easy-logger';
+
 import type { SimpleResponseUtilOptions } from '../types';
 
 export class SimpleResponseUtil {
@@ -9,7 +10,10 @@ export class SimpleResponseUtil {
    * 初始化响应工具
    * 支持配置项：silence 禁止日志；warnOnError 将错误级别降为 warn
    */
-  constructor(initLogger: string | EasyLogger, options?: SimpleResponseUtilOptions) {
+  constructor(
+    initLogger: string | EasyLogger,
+    options?: SimpleResponseUtilOptions,
+  ) {
     if (typeof initLogger === 'string') {
       this.logger = new EasyLogger(initLogger);
     } else if (initLogger) {
@@ -71,7 +75,11 @@ export class SimpleResponseUtil {
   /**
    * 静态成功响应
    */
-  public static success<T = any>(message?: string, data?: T, options?: SimpleResponseUtilOptions) {
+  public static success<T = any>(
+    message?: string,
+    data?: T,
+    options?: SimpleResponseUtilOptions,
+  ) {
     const logger = new EasyLogger(SimpleResponseUtil.name);
     const util = new SimpleResponseUtil(logger, options);
     return util.success(message, data);
@@ -79,7 +87,11 @@ export class SimpleResponseUtil {
   /**
    * 静态失败响应
    */
-  public static fail<T = any>(message?: string, data?: T, options?: SimpleResponseUtilOptions) {
+  public static fail<T = any>(
+    message?: string,
+    data?: T,
+    options?: SimpleResponseUtilOptions,
+  ) {
     const logger = new EasyLogger(SimpleResponseUtil.name);
     const util = new SimpleResponseUtil(logger, options);
     return util.fail(message, data);
