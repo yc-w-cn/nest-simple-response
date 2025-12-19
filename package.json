@@ -18,8 +18,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "clean": "rm -rf dist",
-    "lint": "eslint src/**/*.ts",
-    "prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test"
+    "lint": "eslint src/**/*.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.9",
